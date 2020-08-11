@@ -1,0 +1,263 @@
+Transition:
+    Menu:
+    CreateFlashcard:
+    ReviewMenu:
+    Slideshow:
+    Quiz:
+    
+
+<Menu>:
+    name: "menu"
+
+    FloatLayout:
+        Label:
+            text:"E-Card Learning Application"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.64}
+            font_size: 56
+            font_name: "Carrington"
+            color: (255/255.0, 215/255.0, 0, 1)
+
+
+        Button:
+            text: "CREATE NEW FLASHCARDS"
+            size_hint: (None, None)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.24}
+            size_hint: (None, None)
+            width: 260
+            height: 72
+            font_name: "SciFly"
+            background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+            on_release:
+                app.root.current = "create"
+
+
+<CreateFlashcard>:
+    name: "create"
+    word: word
+    meaning: meaning
+    GridLayout:
+        rows: 2
+        
+        GridLayout:
+            rows:1
+            Label:
+                text:"Flashcard"
+                font_size: 66
+                font_name: "Carrington"
+                color: (255/255.0, 215/255.0, 0, 1)
+        
+        GridLayout:
+            rows:1
+            cols:2
+
+            GridLayout:
+                cols:1
+
+                Label:
+                    text: "Enter word"
+                    font_name: "SciFly"
+                    font_size: 20
+                TextInput:
+                    id: word
+                    multiline: False
+
+                Label:
+                    text: "Enter meaning"
+                    font_name: "SciFly"
+                    font_size: 20
+                TextInput:
+                    id: meaning
+                    multiline: False
+
+            GridLayout:
+                cols: 1
+
+                Button:
+                    text: "ADD SLIDE"
+                    font_name: "SciFly"
+                    font_size: 18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.add()
+
+                Button:
+                    text: "REMOVE LAST SLIDE"
+                    font_name: "SciFly"
+                    font_size: 18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.remove()
+
+                Button:
+                    text: "START REVIEWING"
+                    font_name: "SciFly"
+                    font_size: 18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        app.root.current = "review"
+
+
+<ReviewMenu>:
+    name: "review"
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "CHOOSE ONE TO START REVIEWING"
+            font_name: "Origicide"
+            font_size: 26
+            color: (255/255.0, 215/255.0, 0, 1)
+
+
+        Button:
+            text: "SLIDESHOW"
+            font_name: "SciFly"
+            font_size: 18
+            background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+
+            on_release:
+                app.root.current = "slideshow"
+        Button:
+
+            text: "QUIZ PUZZLE"
+            font_name: "SciFly"
+            font_size: 18
+            background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+
+            on_release:
+                app.root.current = "quiz"
+<Slideshow>:
+    name: "slideshow"
+
+    GridLayout:
+        rows:2
+        
+        GridLayout:
+            rows:1
+            Label:
+                text:"Slideshow"
+                font_name: "Carrington"
+                font_size: 64
+                color: (255/255.0, 215/255.0, 0, 1)
+
+        GridLayout:
+
+            rows:1
+            cols:2
+
+            GridLayout:
+                background_color: (255/255.0, 140 / 255.0, 0, 1)
+                cols:1
+                Label:
+                    text: root.word_slide
+                    font_name: "SciFly"
+
+
+                Label:
+                    text: root.meaning_slide
+                    font_name: "SciFly"
+
+
+            GridLayout:
+                cols:1
+                
+                Button:
+                    text: "START"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.start()
+                    
+                Button:
+                    text: "PREVIOUS"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.prev()
+                    
+                Button:
+                    text: "NEXT"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.next()
+                        
+                Button:
+                    text: "QUIZ PUZZLE"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        app.root.current = "quiz"
+                        
+               
+
+<Quiz>:
+    name: "quiz"
+
+    GridLayout:
+        rows:2
+        
+        GridLayout:
+            rows:1
+            Label:
+                text:"Quiz Puzzle"
+                font_name: "Carrington"
+                font_size: 60
+                color: (255/255.0, 215/255.0, 0, 1)
+                
+        GridLayout:
+            rows:1
+            cols:2
+
+            GridLayout:
+                cols:1
+
+                Label:
+                    text: root.shuffle_word
+                    font_name: "SciFly"
+
+                Label:
+                    text: root.shuffle_meaning
+                    font_name: "SciFly"
+                
+
+            GridLayout:
+                cols:1
+
+                Button:
+                    text:"START"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.quiz_word()
+
+                Button:
+                    text: "SHOW MEANING"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.show()
+                    
+                Button:
+                    text: "NEXT"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        root.next_word()
+                        
+                Button:
+                    text: "SLIDESHOW"
+                    font_name: "SciFly"
+                    font_size:18
+                    background_color: (255/255.0, 51/255.0, 51/255.0, 1)
+                    on_release:
+                        app.root.current = "slideshow"
+
